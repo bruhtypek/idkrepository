@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Osobný životopis a portfólio.">
+	<title>Životopis | Vaše meno</title>
+	<style>
+		:root {
+			--ink: #202925;
+			--muted: #68766f;
+			--accent: #b8e36d;
+			--paper: #f7f8f3;
+			--line: #e2e8df;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			background: var(--paper);
+			color: var(--ink);
+			font: 16px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+		}
+		a { color: inherit; }
+		.page { width: min(1100px, calc(100% - 40px)); margin: 0 auto; }
+		header {
+			min-height: 82px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-bottom: 1px solid var(--line);
+		}
+		.brand { font-size: 1rem; font-weight: 800; letter-spacing: .04em; }
+		nav { display: flex; gap: 28px; }
+		nav a { color: var(--muted); font-size: .9rem; text-decoration: none; }
+		nav a:hover { color: var(--ink); }
+
+		.hero {
+			display: grid;
+			grid-template-columns: 1.35fr .65fr;
+			align-items: center;
+			gap: 60px;
+			padding: 92px 0 78px;
+		}
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 9px;
+			color: var(--muted);
+			font-size: .78rem;
+			font-weight: 700;
+			letter-spacing: .12em;
+			text-transform: uppercase;
+		}
+		.eyebrow::before { width: 8px; height: 8px; border-radius: 50%; background: #78a83b; content: ""; }
+		h1 { max-width: 650px; margin: 18px 0; font-size: clamp(3rem, 7vw, 5.8rem); line-height: .98; letter-spacing: -.065em; }
+		h1 span { color: #71845c; }
+		.intro { max-width: 570px; color: var(--muted); font-size: 1.08rem; }
+		.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+		.button { display: inline-block; padding: 12px 19px; border: 1px solid var(--ink); border-radius: 5px; font-size: .9rem; font-weight: 700; text-decoration: none; }
+		.button.primary { background: var(--ink); color: white; }
+		.button.secondary { border-color: var(--line); }
+		.portrait-wrap { position: relative; max-width: 300px; justify-self: end; }
+		.portrait {
+			aspect-ratio: 4 / 5;
+			display: grid;
+			place-items: center;
+			overflow: hidden;
+			border-radius: 48% 48% 8px 8px;
+			background: #e4ecd8;
+			color: #71845c;
+			font-size: .85rem;
+			text-align: center;
+		}
+		.portrait span { padding: 20px; }
+		.badge { position: absolute; right: -22px; bottom: 22px; padding: 14px 17px; border-radius: 6px; background: var(--accent); font-size: .82rem; font-weight: 800; transform: rotate(-3deg); }
+
+		section { padding: 58px 0; border-top: 1px solid var(--line); }
+		.section-heading { display: flex; align-items: baseline; gap: 18px; margin-bottom: 30px; }
+		.section-heading h2 { margin: 0; font-size: 1.8rem; letter-spacing: -.04em; }
+		.section-heading small { color: var(--muted); }
+		.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+		.about-grid p { margin: 0; color: var(--muted); }
+		.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+		.fact { padding: 14px 0; border-bottom: 1px solid var(--line); }
+		.fact strong { display: block; font-size: .82rem; }
+		.fact span { color: var(--muted); font-size: .9rem; }
+
+		.timeline { display: grid; gap: 0; }
+		.item { display: grid; grid-template-columns: 180px 1fr; gap: 28px; padding: 23px 0; border-top: 1px solid var(--line); }
+		.date { color: var(--muted); font-size: .88rem; }
+		.item h3 { margin: 0 0 3px; font-size: 1.08rem; }
+		.item .place { color: #71845c; font-size: .9rem; font-weight: 700; }
+		.item p { max-width: 680px; margin: 9px 0 0; color: var(--muted); font-size: .94rem; }
+
+		.skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+		.skill { padding: 17px; border: 1px solid var(--line); border-radius: 5px; background: #fff; font-weight: 700; }
+		.skill small { display: block; margin-top: 3px; color: var(--muted); font-weight: 400; }
+		.contact { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 34px; border-radius: 8px; background: #e8efdf; }
+		.contact h2 { margin: 0; font-size: 1.6rem; }
+		.contact p { margin: 4px 0 0; color: var(--muted); }
+		footer { padding: 28px 0; color: var(--muted); font-size: .82rem; }
+
+		@media (max-width: 700px) {
+			.page { width: min(100% - 32px, 540px); }
+			header { min-height: 70px; }
+			nav { gap: 14px; }
+			nav a { font-size: .78rem; }
+			.hero { grid-template-columns: 1fr; gap: 35px; padding: 66px 0 52px; }
+			.portrait-wrap { width: min(70%, 250px); justify-self: center; }
+			.about-grid { grid-template-columns: 1fr; gap: 25px; }
+			.item { grid-template-columns: 1fr; gap: 5px; }
+			.skills { grid-template-columns: 1fr 1fr; }
+			.contact { align-items: flex-start; flex-direction: column; padding: 24px; }
+		}
+		@media (max-width: 420px) {
+			nav { gap: 9px; }
+			nav a { font-size: .72rem; }
+			.facts { grid-template-columns: 1fr; }
+			.skills { grid-template-columns: 1fr; }
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<header>
+			<a class="brand" href="#domov" aria-label="Domov">VAŠE MENO<span style="color:#71845c">.</span></a>
+			<nav aria-label="Hlavná navigácia">
+				<a href="#o-mne">O mne</a>
+				<a href="#skusenosti">Skúsenosti</a>
+				<a href="#kontakt">Kontakt</a>
+			</nav>
+		</header>
+
+		<main>
+			<div class="hero" id="domov">
+				<div>
+					<div class="eyebrow">Životopis · 2025</div>
+					<h1>Ahoj, som<br><span>Vaše meno.</span></h1>
+					<p class="intro">[Vaša profesia] so zameraním na [hlavná oblasť]. Rád/rada premieňam dobré nápady na premyslené a funkčné riešenia.</p>
+					<div class="actions">
+						<a class="button primary" href="#kontakt">Spojme sa</a>
+						<a class="button secondary" href="#skusenosti">Moje skúsenosti ↓</a>
+					</div>
+				</div>
+				<div class="portrait-wrap">
+					<div class="portrait"><span>Sem vložte svoju<br>portrétovú fotografiu</span></div>
+					<div class="badge">Otvorený/á novým<br>príležitostiam</div>
+				</div>
+			</div>
+
+			<section id="o-mne">
+				<div class="section-heading"><h2>Niečo o mne</h2><small>01 / Profil</small></div>
+				<div class="about-grid">
+					<p>Som [profesia] s [počet] rokmi skúseností v oblasti [odbor]. Baví ma spolupracovať s ľuďmi, učiť sa nové veci a hľadať riešenia, ktoré prinášajú skutočný výsledok. Tu doplňte krátke, osobné predstavenie.</p>
+					<div class="facts">
+						<div class="fact"><strong>Lokalita</strong><span>Bratislava, Slovensko</span></div>
+						<div class="fact"><strong>E-mail</strong><span>vas.email@example.com</span></div>
+						<div class="fact"><strong>Jazyky</strong><span>Slovenčina, angličtina</span></div>
+						<div class="fact"><strong>Zameranie</strong><span>[Vaša špecializácia]</span></div>
+					</div>
+				</div>
+			</section>
+
+			<section id="skusenosti">
+				<div class="section-heading"><h2>Pracovné skúsenosti</h2><small>02 / Kariéra</small></div>
+				<div class="timeline">
+					<article class="item">
+						<div class="date">2022 — súčasnosť</div>
+						<div><h3>[Názov pracovnej pozície]</h3><div class="place">[Názov spoločnosti] · Bratislava</div><p>Stručne opíšte svoju náplň práce a najdôležitejší výsledok. Zamerajte sa na konkrétny prínos alebo úspech.</p></div>
+					</article>
+					<article class="item">
+						<div class="date">2019 — 2022</div>
+						<div><h3>[Predchádzajúca pozícia]</h3><div class="place">[Názov spoločnosti] · [Mesto]</div><p>Doplňte relevantné skúsenosti, zodpovednosti a výsledky, ktoré súvisia s prácou, o ktorú sa uchádzate.</p></div>
+					</article>
+					<article class="item">
+						<div class="date">2016 — 2019</div>
+						<div><h3>[Názov školy alebo odboru]</h3><div class="place">Vzdelanie · [Mesto]</div><p>[Dosiahnuté vzdelanie, odbor, prípadne významný projekt alebo ocenenie.]</p></div>
+					</article>
+				</div>
+			</section>
+
+			<section id="zrucnosti">
+				<div class="section-heading"><h2>Zručnosti</h2><small>03 / Čo viem</small></div>
+				<div class="skills">
+					<div class="skill">[Odborná zručnosť]<small>Pokročilá úroveň</small></div>
+					<div class="skill">[Nástroj alebo technológia]<small>Pokročilá úroveň</small></div>
+					<div class="skill">Komunikácia<small>Tímová spolupráca</small></div>
+					<div class="skill">[Jazyk]<small>[Úroveň]</small></div>
+					<div class="skill">Organizácia práce<small>Plánovanie a spoľahlivosť</small></div>
+					<div class="skill">[Ďalšia zručnosť]<small>[Úroveň alebo stručný opis]</small></div>
+				</div>
+			</section>
+
+			<section id="kontakt">
+				<div class="contact">
+					<div><h2>Máte pre mňa príležitosť?</h2><p>Ozvite sa mi — rád/rada sa porozprávam.</p></div>
+					<a class="button primary" href="mailto:vas.email@example.com">Napísať e-mail ↗</a>
+				</div>
+			</section>
+		</main>
+		<footer>© 2025 Vaše meno · Životopis a osobné portfólio</footer>
+	</div>
+</body>
+</html>
